@@ -4,9 +4,7 @@
 Create a todo app by using web application technology, such as React.js Vue.js Angular Svelte, etc. You can use any frontend framework that you prefer, but we will appreciate it if you use React.js. The detail of the web application shown on the list here.
 
 1. Can read todo tasks in list form
-2. Can create a new todo task and when refreshing the web application the data should not disappear 
-<br />
-**TIP. Save in local storage, don't use any database**
+2. Can create a new todo task and when refreshing the web application the data should not disappear  ***TIP. Save in local storage, don't use any database technology***
 3. Can update data in todo task
 4. Can mark done when finish todo task
 5. Can remove check or un-check todo task
