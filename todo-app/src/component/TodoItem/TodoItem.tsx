@@ -38,7 +38,7 @@ const TodoItem: React.FC<Props> = ({
   };
 
   return (
-    <li className="flex justify-between items-center p-4">
+    <li className="flex justify-between items-center px-32 py-4">
       <div className="flex items-center">
         <input
           type="checkbox"
@@ -62,13 +62,15 @@ const TodoItem: React.FC<Props> = ({
       </div>
 
       <div className="flex items-center">
-        <button
-          type="button"
-          onClick={handleEditTodo}
-          className="text-blue-500"
-        >
-          <PencilIcon className="h-5 w-5" />
-        </button>
+        {!todo.isDone && (
+          <button
+            type="button"
+            onClick={handleEditTodo}
+            className="text-blue-500"
+          >
+            <PencilIcon className="h-5 w-5" />
+          </button>
+        )}
         <button
           type="button"
           onClick={handleDeleteTodo}
