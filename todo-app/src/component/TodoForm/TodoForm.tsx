@@ -20,15 +20,6 @@ function TodoForm({ onCancel, onSaveTodo, initialTodo }: Props) {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("e:", e);
-
-    const formData = new FormData(e.currentTarget);
-    console.log("formData:", formData);
-
-    // const name = event.target.username.value;
-    // const description = formData.get("description") as string;
-    // const startDate = new Date(formData.get("startDate") as string);
-    // const endDate = new Date(formData.get("endDate") as string);
     const isDone = false;
     const id = uuidv4();
 
