@@ -24,22 +24,21 @@ const TodoForm: React.FC<Props> = ({ onCancel, onSaveTodo, initialTodo }) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const isDone = false;
 
-    const newTodo: Todo = {
+    const todo: Todo = {
       id: "",
       name,
       description,
       startDate,
       endDate,
-      isDone,
+      isDone: false,
     };
 
     if (initialTodo) {
-      newTodo.id = initialTodo.id;
-      onSaveTodo(newTodo);
+      todo.id = initialTodo.id;
+      onSaveTodo(todo);
     } else {
-      onSaveTodo(newTodo);
+      onSaveTodo(todo);
     }
 
     setName("");
@@ -58,13 +57,15 @@ const TodoForm: React.FC<Props> = ({ onCancel, onSaveTodo, initialTodo }) => {
 
         <div className="mb-4">
           <label htmlFor="name">Name</label>
+          <span className="text-red-500">*</span>
           <input
             type="text"
             id="name"
             className="border rounded-lg p-2 w-full"
-            placeholder="Name"
+            placeholder="Enter task name"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            required
           />
         </div>
 
@@ -73,7 +74,7 @@ const TodoForm: React.FC<Props> = ({ onCancel, onSaveTodo, initialTodo }) => {
           <textarea
             id="description"
             className="border rounded-lg p-2 w-full"
-            placeholder="Description"
+            placeholder="Enter task description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
@@ -81,6 +82,7 @@ const TodoForm: React.FC<Props> = ({ onCancel, onSaveTodo, initialTodo }) => {
 
         <div className="mb-4">
           <label htmlFor="startDate">Start Date</label>
+          <span className="text-red-500">*</span>
           <DatePicker
             id="startDate"
             selected={startDate}
@@ -89,11 +91,13 @@ const TodoForm: React.FC<Props> = ({ onCancel, onSaveTodo, initialTodo }) => {
             dateFormat={DATE_FORMAT}
             placeholderText="Start Date"
             className="border rounded-lg p-2 w-full"
+            required
           />
         </div>
 
         <div className="mb-4">
           <label htmlFor="endDate">End Date</label>
+          <span className="text-red-500">*</span>
           <DatePicker
             id="endDate"
             selected={endDate}
@@ -102,6 +106,7 @@ const TodoForm: React.FC<Props> = ({ onCancel, onSaveTodo, initialTodo }) => {
             dateFormat={DATE_FORMAT}
             placeholderText="End Date"
             className="border rounded-lg p-2 w-full"
+            required
           />
         </div>
 
