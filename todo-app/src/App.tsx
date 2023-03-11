@@ -1,17 +1,11 @@
 import React, { useState, useEffect } from "react";
 import TodoList from "./component/TodoList/TodoList";
 import { Todo } from "./App.inteface";
+import { v4 as uuidv4 } from "uuid";
 
-function App() {
+const App: React.FC<{}> = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    const storedTodos = localStorage.getItem("todos");
-    if (storedTodos) {
-      setTodos(JSON.parse(storedTodos));
-    }
-  }, []);
 
   useEffect(() => {
     const savedTodos = localStorage.getItem("todos");
@@ -41,11 +35,18 @@ function App() {
 
   const handleSaveTodo = (todo: Todo) => {
     const { id } = todo;
-    const newTodo = { ...todo };
+    if (todo.endDate && todo.startDate && todo.endDate < todo.startDate) {
+      alert("End date cannot be before start date or before current date.");
+      return;
+    }
     let updatedTodos: Todo[];
     if (id) {
       updatedTodos = todos.map((t) => (t.id === id ? todo : t));
     } else {
+      const newTodo: Todo = {
+        ...todo,
+        id: uuidv4(),
+      };
       updatedTodos = [...todos, newTodo];
     }
     setTodos(updatedTodos);
@@ -64,6 +65,6 @@ function App() {
       </div>
     </div>
   );
-}
+};
 
 export default App;
