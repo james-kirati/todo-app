@@ -9,3 +9,5 @@ export function formatDate(date: Date, format: string): string {
 
   return result;
 }
+
+export const DATE_FORMAT = "yyyy-MM-dd";

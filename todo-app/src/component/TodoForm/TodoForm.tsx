@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Todo } from "../../App.inteface";
 import DatePicker from "react-datepicker";
-import { v4 as uuidv4 } from "uuid";
 import "react-datepicker/dist/react-datepicker.css";
+import { DATE_FORMAT } from "../../utils/utils";
 
 interface Props {
   onCancel: () => void;
@@ -10,21 +10,24 @@ interface Props {
   initialTodo?: Todo | null;
 }
 
-function TodoForm({ onCancel, onSaveTodo, initialTodo }: Props) {
+const TodoForm: React.FC<Props> = ({ onCancel, onSaveTodo, initialTodo }) => {
   const [name, setName] = useState(initialTodo?.name ?? "");
   const [description, setDescription] = useState(
     initialTodo?.description ?? ""
   );
-  const [startDate, setStartDate] = useState<Date | null>(new Date());
-  const [endDate, setEndDate] = useState<Date | null>(new Date());
+  const [startDate, setStartDate] = useState<Date | null>(
+    initialTodo?.startDate ? new Date(initialTodo?.startDate) : new Date()
+  );
+  const [endDate, setEndDate] = useState<Date | null>(
+    initialTodo?.endDate ? new Date(initialTodo?.endDate) : new Date()
+  );
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const isDone = false;
-    const id = uuidv4();
 
     const newTodo: Todo = {
-      id,
+      id: "",
       name,
       description,
       startDate,
@@ -81,8 +84,9 @@ function TodoForm({ onCancel, onSaveTodo, initialTodo }: Props) {
           <DatePicker
             id="startDate"
             selected={startDate}
+            minDate={new Date()}
             onChange={(date) => setStartDate(date)}
-            dateFormat="yyyy/MM/dd"
+            dateFormat={DATE_FORMAT}
             placeholderText="Start Date"
             className="border rounded-lg p-2 w-full"
           />
@@ -93,8 +97,9 @@ function TodoForm({ onCancel, onSaveTodo, initialTodo }: Props) {
           <DatePicker
             id="endDate"
             selected={endDate}
+            minDate={startDate}
             onChange={(date) => setEndDate(date)}
-            dateFormat="yyyy/MM/dd"
+            dateFormat={DATE_FORMAT}
             placeholderText="End Date"
             className="border rounded-lg p-2 w-full"
           />
@@ -118,6 +123,6 @@ function TodoForm({ onCancel, onSaveTodo, initialTodo }: Props) {
       </form>
     </div>
   );
-}
+};
 
 export default TodoForm;

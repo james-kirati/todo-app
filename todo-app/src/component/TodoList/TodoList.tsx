@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Todo } from "../../App.inteface";
 import TodoForm from "../TodoForm/TodoForm";
 import TodoItem from "../TodoItem/TodoItem";
+import { v4 as uuidv4 } from "uuid";
 
 interface Props {
   todos: Todo[];
@@ -10,7 +11,12 @@ interface Props {
   onSaveTodo: (todo: Todo) => void;
 }
 
-function TodoList({ todos, onToggleDone, onDeleteTodo, onSaveTodo }: Props) {
+const TodoList: React.FC<Props> = ({
+  todos,
+  onToggleDone,
+  onDeleteTodo,
+  onSaveTodo,
+}: Props) => {
   const [showForm, setShowForm] = useState(false);
 
   const handleSaveTodo = (todo: Todo) => {
@@ -33,6 +39,7 @@ function TodoList({ todos, onToggleDone, onDeleteTodo, onSaveTodo }: Props) {
       <ul className="divide-y divide-gray-200">
         {todos.map((todo) => (
           <TodoItem
+            key={uuidv4()}
             todo={todo}
             onToggleDone={onToggleDone}
             onDeleteTodo={onDeleteTodo}
@@ -51,6 +58,6 @@ function TodoList({ todos, onToggleDone, onDeleteTodo, onSaveTodo }: Props) {
       </div>
     </div>
   );
-}
+};
 
 export default TodoList;
