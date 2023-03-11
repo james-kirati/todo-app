@@ -6,7 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 interface Props {
   onCancel: () => void;
-  onSaveTodo: (todo: Todo, id?: string) => void;
+  onSaveTodo: (todo: Todo) => void;
   initialTodo?: Todo | null;
 }
 
@@ -27,14 +27,14 @@ function TodoForm({ onCancel, onSaveTodo, initialTodo }: Props) {
       id,
       name,
       description,
-      startDate: startDate,
+      startDate,
       endDate,
       isDone,
     };
 
     if (initialTodo) {
       newTodo.id = initialTodo.id;
-      onSaveTodo && onSaveTodo(newTodo);
+      onSaveTodo(newTodo);
     } else {
       onSaveTodo(newTodo);
     }

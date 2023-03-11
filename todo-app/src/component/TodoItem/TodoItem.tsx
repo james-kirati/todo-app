@@ -9,7 +9,7 @@ interface Props {
   todo: Todo;
   onToggleDone: (id: string) => void;
   onDeleteTodo: (id: string) => void;
-  onSaveTodo: (todo: Todo, id?: string) => void;
+  onSaveTodo: (todo: Todo) => void;
 }
 
 function TodoItem({ todo, onToggleDone, onDeleteTodo, onSaveTodo }: Props) {
@@ -20,19 +20,15 @@ function TodoItem({ todo, onToggleDone, onDeleteTodo, onSaveTodo }: Props) {
   };
 
   const handleDeleteTodo = () => {
-    onDeleteTodo && onDeleteTodo(todo.id);
+    onDeleteTodo(todo.id);
   };
 
   const handleEditTodo = () => {
     setShowForm(true);
   };
 
-  const handleCloseForm = () => {
-    setShowForm(false);
-  };
-
-  const handleSaveTodo = (updatedTodo: Todo) => {
-    onSaveTodo && onSaveTodo(updatedTodo, todo.id);
+  const handleSaveTodo = (todo: Todo) => {
+    onSaveTodo(todo);
     setShowForm(false);
   };
 

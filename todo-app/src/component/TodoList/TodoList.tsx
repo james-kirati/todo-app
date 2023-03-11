@@ -7,15 +7,14 @@ interface Props {
   todos: Todo[];
   onToggleDone: (id: string) => void;
   onDeleteTodo: (id: string) => void;
-  onSaveTodo: (todo: Todo, id?: string) => void;
+  onSaveTodo: (todo: Todo) => void;
 }
 
 function TodoList({ todos, onToggleDone, onDeleteTodo, onSaveTodo }: Props) {
   const [showForm, setShowForm] = useState(false);
-  const [editingTodo, setEditingTodo] = useState<Todo | null>(null);
 
-  const handleSaveTodo = (todo: Todo, id?: string) => {
-    onSaveTodo(todo, id);
+  const handleSaveTodo = (todo: Todo) => {
+    onSaveTodo(todo);
     setShowForm(false);
   };
 
@@ -23,23 +22,17 @@ function TodoList({ todos, onToggleDone, onDeleteTodo, onSaveTodo }: Props) {
     <div className="p-4">
       {showForm && (
         <TodoForm
-          onSaveTodo={
-            editingTodo
-              ? (todo: Todo) => handleSaveTodo(todo, editingTodo.id)
-              : (todo: Todo) => handleSaveTodo(todo)
-          }
+          onSaveTodo={(todo: Todo) => handleSaveTodo(todo)}
           onCancel={() => {
-            setEditingTodo(null);
             setShowForm(false);
           }}
-          initialTodo={editingTodo}
+          initialTodo={null}
         />
       )}
 
       <ul className="divide-y divide-gray-200">
         {todos.map((todo) => (
           <TodoItem
-            key={todo.id}
             todo={todo}
             onToggleDone={onToggleDone}
             onDeleteTodo={onDeleteTodo}

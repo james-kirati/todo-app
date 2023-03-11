@@ -1,22 +1,10 @@
 import React, { useState, useEffect } from "react";
 import TodoList from "./component/TodoList/TodoList";
 import { Todo } from "./App.inteface";
-import { v4 as uuidv4 } from "uuid";
 
 function App() {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [isMounted, setIsMounted] = useState(false);
-
-  // useEffect(() => {
-  //   const savedTodos = localStorage.getItem("todos");
-  //   if (savedTodos) {
-  //     setTodos(JSON.parse(savedTodos));
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   localStorage.setItem("todos", JSON.stringify(todos));
-  // }, [todos]);
 
   useEffect(() => {
     const storedTodos = localStorage.getItem("todos");
@@ -51,16 +39,13 @@ function App() {
     setTodos(updatedTodos);
   };
 
-  const handleSaveTodo = (todo: Todo, id?: string) => {
-    console.log("todo:", todo);
-
-    const newTodo = { ...todo, id: uuidv4() };
+  const handleSaveTodo = (todo: Todo) => {
+    const { id } = todo;
+    const newTodo = { ...todo };
     let updatedTodos: Todo[];
     if (id) {
-      console.log("has id");
       updatedTodos = todos.map((t) => (t.id === id ? todo : t));
     } else {
-      console.log("not has id");
       updatedTodos = [...todos, newTodo];
     }
     setTodos(updatedTodos);
