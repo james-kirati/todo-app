@@ -34,6 +34,9 @@ const TodoForm: React.FC<Props> = ({ onCancel, onSaveTodo, initialTodo }) => {
       isDone: false,
     };
 
+    if (!todo.name || !todo.startDate || !todo.endDate) return;
+    if (todo.endDate < todo.startDate || todo.endDate < new Date()) return;
+
     if (initialTodo) {
       todo.id = initialTodo.id;
       onSaveTodo(todo);
@@ -122,7 +125,7 @@ const TodoForm: React.FC<Props> = ({ onCancel, onSaveTodo, initialTodo }) => {
             type="submit"
             className="ml-2 px-4 py-2 bg-blue-500 text-white rounded-lg"
           >
-            {initialTodo ? "Save Changes" : "Create Todo"}
+            {initialTodo ? "Save Changes" : "Create"}
           </button>
         </div>
       </form>

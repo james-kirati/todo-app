@@ -73,4 +73,21 @@ describe("TodoForm component", () => {
 
     expect(onCancel).toHaveBeenCalled();
   });
+
+  it("should not save todo if end date is less than start date", () => {
+    render(<TodoForm onSaveTodo={onSaveTodo} onCancel={onCancel} />);
+
+    const nameInput = screen.getByLabelText("Name");
+    const startDateInput = screen.getByLabelText("Start Date");
+    const endDateInput = screen.getByLabelText("End Date");
+
+    fireEvent.change(nameInput, { target: { value: "Test Todo" } });
+    fireEvent.change(startDateInput, { target: { value: "2023-03-15" } });
+    fireEvent.change(endDateInput, { target: { value: "2023-03-10" } });
+
+    const createButton = screen.getByText("Create");
+    fireEvent.click(createButton);
+
+    expect(onSaveTodo).not.toHaveBeenCalled();
+  });
 });
