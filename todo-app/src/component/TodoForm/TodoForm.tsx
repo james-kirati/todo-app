@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Todo } from "../../App.inteface";
+import { Todo } from "../../App.interface";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { DATE_FORMAT } from "../../utils/utils";
@@ -34,8 +34,15 @@ const TodoForm: React.FC<Props> = ({ onCancel, onSaveTodo, initialTodo }) => {
       isDone: false,
     };
 
-    if (!todo.name || !todo.startDate || !todo.endDate) return;
-    if (todo.endDate < todo.startDate || todo.endDate < new Date()) return;
+    if (!todo.name || !todo.startDate || !todo.endDate) {
+      alert("Please provide all the required fields.");
+      return;
+    }
+
+    if (todo.endDate < todo.startDate) {
+      alert("End date cannot be less than start date or current date.");
+      return;
+    }
 
     if (initialTodo) {
       todo.id = initialTodo.id;

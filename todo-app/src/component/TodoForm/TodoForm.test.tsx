@@ -1,10 +1,11 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import { Todo } from "../../App.inteface";
+import { Todo } from "../../App.interface";
 import TodoForm from "./TodoForm";
 
 describe("TodoForm component", () => {
   const onCancel = jest.fn();
   const onSaveTodo = jest.fn();
+  window.alert = jest.fn();
 
   const todo: Todo = {
     id: "1",
@@ -89,5 +90,9 @@ describe("TodoForm component", () => {
     fireEvent.click(createButton);
 
     expect(onSaveTodo).not.toHaveBeenCalled();
+
+    expect(window.alert).toHaveBeenCalledWith(
+      "End date cannot be less than start date or current date."
+    );
   });
 });
