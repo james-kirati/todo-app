@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import TodoList from "./component/TodoList/TodoList";
-import { Todo } from "./App.inteface";
+import { Todo } from "./App.interface";
 import { v4 as uuidv4 } from "uuid";
 
 const App: React.FC<{}> = () => {
