@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import TodoList from "./TodoList";
-import { Todo } from "../../App.inteface";
+import { Todo } from "../../App.interface";
 
 describe("TodoList", () => {
   const todos: Todo[] = [

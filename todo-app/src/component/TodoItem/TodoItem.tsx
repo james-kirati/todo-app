@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Todo } from "../../App.inteface";
+import { Todo } from "../../App.interface";
 import { formatDate, DATE_FORMAT } from "../../utils/utils";
 import classNames from "classnames";
 import { PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
@@ -41,6 +41,7 @@ const TodoItem: React.FC<Props> = ({
     <li className="flex justify-between items-center px-32 py-4">
       <div className="flex items-center">
         <input
+          title="checkbox"
           type="checkbox"
           checked={todo.isDone}
           onChange={handleToggleDone}
@@ -64,6 +65,7 @@ const TodoItem: React.FC<Props> = ({
       <div className="flex items-center">
         {!todo.isDone && (
           <button
+            title="edit"
             type="button"
             onClick={handleEditTodo}
             className="text-blue-500"
@@ -72,6 +74,7 @@ const TodoItem: React.FC<Props> = ({
           </button>
         )}
         <button
+          title="delete"
           type="button"
           onClick={handleDeleteTodo}
           className="ml-2 text-red-500"
