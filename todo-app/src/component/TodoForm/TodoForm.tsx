@@ -40,7 +40,7 @@ const TodoForm: React.FC<Props> = ({ onCancel, onSaveTodo, initialTodo }) => {
     }
 
     if (todo.endDate < todo.startDate) {
-      alert("End date cannot be less than start date or current date.");
+      alert("End date cannot be less than start date.");
       return;
     }
 
