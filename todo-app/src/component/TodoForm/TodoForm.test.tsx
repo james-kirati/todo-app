@@ -92,7 +92,7 @@ describe("TodoForm component", () => {
     expect(onSaveTodo).not.toHaveBeenCalled();
 
     expect(window.alert).toHaveBeenCalledWith(
-      "End date cannot be less than start date or current date."
+      "End date cannot be less than start date."
     );
   });
 });
